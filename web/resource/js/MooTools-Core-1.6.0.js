@@ -753,7 +753,7 @@ Number.implement(methods);
 
 name: String
 
-description: Contains String Prototypes like camelCase, capitalize, test, and toInt.
+description: Contains String Prototypes like camelCase, capitalize, bin.test, and toInt.
 
 license: MIT-style license.
 

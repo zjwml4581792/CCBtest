@@ -1117,7 +1117,7 @@
         /**
          * Detecting whether the value of an element that matches a rule
          *
-         * @method test
+         * @method bin.test
          * @param {Element} el - input element
          * @param {String} rule - rule name
          */

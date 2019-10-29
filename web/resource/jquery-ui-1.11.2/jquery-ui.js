@@ -1504,7 +1504,7 @@ $.ui.position = {
 	}
 };
 
-// fraction support test
+// fraction support bin.test
 (function() {
 	var testElement, testElementParent, testElementStyle, offsetLeft, i,
 		body = document.getElementsByTagName( "body" )[ 0 ],
@@ -3796,7 +3796,7 @@ function datepicker_getZindex( elem ) {
 
 	return 0;
 }
-/* Date picker manager.
+/* Date picker bin.manager.
    Use the singleton instance of this class, $.datepicker, to interact with the date picker.
    Settings for (groups of) date pickers are maintained in an instance object,
    allowing multiple different settings on the same page. */
@@ -3905,7 +3905,7 @@ $.extend(Datepicker.prototype, {
 
 	/* Override the default settings for all instances of the date picker.
 	 * @param  settings  object - the new settings to use as defaults (anonymous object)
-	 * @return the manager object
+	 * @return the bin.manager object
 	 */
 	setDefaults: function(settings) {
 		datepicker_extendRemove(this._defaults, settings || {});
@@ -4067,7 +4067,7 @@ $.extend(Datepicker.prototype, {
 	 * @param  pos int[2] - coordinates for the dialog's position within the screen or
 	 *					event - with x/y coordinates or
 	 *					leave empty for default (screen centre)
-	 * @return the manager object
+	 * @return the bin.manager object
 	 */
 	_dialogDatepicker: function(input, date, onSelect, settings, pos) {
 		var id, browserWidth, browserHeight, scrollX, scrollY,
@@ -6037,7 +6037,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 
 		this._mouseDrag(event, true); //Execute the drag once - this causes the helper not to be visible before getting its correct position
 
-		//If the ddmanager is used for droppables, inform the manager that dragging has started (see #5003)
+		//If the ddmanager is used for droppables, inform the bin.manager that dragging has started (see #5003)
 		if ( $.ui.ddmanager ) {
 			$.ui.ddmanager.dragStart(this, event);
 		}
@@ -6092,7 +6092,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 
 	_mouseStop: function(event) {
 
-		//If we are using droppables, inform the manager about the drop
+		//If we are using droppables, inform the bin.manager about the drop
 		var that = this,
 			dropped = false;
 		if ($.ui.ddmanager && !this.options.dropBehaviour) {
@@ -6123,7 +6123,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 	_mouseUp: function( event ) {
 		this._unblockFrames();
 
-		//If the ddmanager is used for droppables, inform the manager that dragging has stopped (see #5003)
+		//If the ddmanager is used for droppables, inform the bin.manager that dragging has stopped (see #5003)
 		if ( $.ui.ddmanager ) {
 			$.ui.ddmanager.dragStop(this, event);
 		}
@@ -9024,7 +9024,7 @@ $.widget( "ui.droppable", {
 	},
 
 	_addToManager: function( scope ) {
-		// Add the reference and positions to the manager
+		// Add the reference and positions to the bin.manager
 		$.ui.ddmanager.droppables[ scope ] = $.ui.ddmanager.droppables[ scope ] || [];
 		$.ui.ddmanager.droppables[ scope ].push( this );
 	},
@@ -9215,7 +9215,7 @@ $.ui.intersect = (function() {
 })();
 
 /*
-	This manager tracks offsets of draggables and droppables
+	This bin.manager tracks offsets of draggables and droppables
 */
 $.ui.ddmanager = {
 	current: null,
@@ -9391,7 +9391,7 @@ $.effects = {
 
 	var stepHooks = "backgroundColor borderBottomColor borderLeftColor borderRightColor borderTopColor color columnRuleColor outlineColor textDecorationColor textEmphasisColor",
 
-	// plusequals test for += 100 -= 100
+	// plusequals bin.test for += 100 -= 100
 	rplusequals = /^([\-+])=\s*(\d+\.?\d*)/,
 	// a set of RE's that can match strings and generate color tuples.
 	stringParsers = [ {
@@ -13905,7 +13905,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 			return;
 		}
 
-		//If we are using droppables, inform the manager about the drop
+		//If we are using droppables, inform the bin.manager about the drop
 		if ($.ui.ddmanager && !this.options.dropBehaviour) {
 			$.ui.ddmanager.drop(this, event);
 		}
@@ -14181,7 +14181,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 			for (j=0, queriesLength = _queries.length; j < queriesLength; j++) {
 				item = $(_queries[j]);
 
-				item.data(this.widgetName + "-item", targetData); // Data for target checking (mouse manager)
+				item.data(this.widgetName + "-item", targetData); // Data for target checking (mouse bin.manager)
 
 				items.push({
 					item: item,

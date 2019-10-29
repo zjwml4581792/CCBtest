@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccb.mapper.UserMapper">
+	<!-- 定义ResultMap -->
+	<resultMap type="User" id="userResultMap">
+		<!-- 用户表的字段 id -->
+		<id property="id" column="id" />
+		<!-- 普通用户表的字段 -->
+		<result property="uname" column="username"/>
+		<result property="upass" column="upass"/>
+		<!-- 关联字段 -->
+		<association property="type" column="typeid" javaType="Type">
+			<!-- 关联 类型的ID -->
+			<id property="id" column="typeid"/>
+			<!-- 关联 类型的普通字段 -->
+			<result property="tname" column="tname"/>
+			<result property="remark" column="remark"/>
+		</association>
+	</resultMap>
+	
+	<!-- 定义ResultMap User和Address -->
+	<resultMap type="User" id="userAddressResultMap">
+		<!-- 用户表的字段 id -->
+		<id property="id" column="id" />
+		<!-- 普通用户表的字段 -->
+		<result property="uname" column="username"/>
+		<result property="upass" column="upass"/>
+		<!-- 关联类型 -->
+		<!-- 关联字段 -->
+		<association property="type" column="typeid" javaType="Type">
+			<!-- 关联 类型的ID -->
+			<id property="id" column="typeid"/>
+			<!-- 关联 类型的普通字段 -->
+			<result property="tname" column="tname"/>
+			<result property="remark" column="remark"/>
+		</association>
+		
+		<!-- 关联集合属性 Address -->
+		<collection property="addresses" ofType="Address">
+			<id property="id" column="addressid"/>
+			<result property="address" column="address"/>
+		</collection>
+		
+	</resultMap>
+	
+	
+
+	<!-- 查询用户 -->
+	<select id="getUserByParm" resultType="User">
+		select * from t_user where uname=#{uname}  and upass=#{upass}
+	</select>
+	
+	<!-- 添加用户 -->
+	<insert id="save">
+		insert into t_user(uname,upass) values(#{uname},#{upass})
+	</insert>
+	
+	<!-- 查询所有用户 -->
+	<select id="getUsers" resultType="User">
+		select * from t_user
+	</select>
+	
+	<!-- 根据Id查询用户 -->
+	<select id="getUserById" resultMap="userResultMap">
+		SELECT
+			a.id,
+			a.uname username,
+			a.upass,
+			b.id typeid,
+			b.tname,
+			b.remark
+		FROM
+			t_user a
+		LEFT JOIN t_type b ON a.typeid = b.id
+		WHERE
+			a.id = #{id}
+	</select>
+	
+	<select id="getUserAddressByUId" resultMap="userAddressResultMap">
+	SELECT
+		a.id,
+		a.uname username,
+		a.upass,
+		b.id typeid,
+		b.tname,
+		b.remark,
+		c.id addressid,
+	  c.address
+	FROM
+		t_user a
+	LEFT  JOIN t_type b ON a.typeid = b.id
+	LEFT JOIN t_user_address c on a.id=c.user_id
+	where a.id=#{user_id}
+	</select>
+	
+</mapper>
